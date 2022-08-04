@@ -117,6 +117,10 @@ button:hover {
   text-shadow: 1px 1px 2px black, 0 0 25px bisque, 0 0 5px rgb(198, 198, 207);
 }
 
+.gameOver img {
+  width: 250px;
+}
+
 .displayNone {
   display: none;
 }
