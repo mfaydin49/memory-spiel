@@ -1,4 +1,4 @@
-const images = [
+const imagesBackUp = [
   { src: "/img/bower.png", alt: "bower", matched: false },
   { src: "/img/browserify.png", alt: "browserify", matched: false },
   { src: "/img/grunt.png", alt: "grunt", matched: false },
@@ -7,4 +7,4 @@ const images = [
   { src: "/img/yeoman.png", alt: "yeoman", matched: false },
 ];
 
-export default images;
+export default imagesBackUp;

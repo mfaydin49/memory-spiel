@@ -12,6 +12,7 @@ export const CardProvider = ({ children }) => {
   const [disabled, setDisabled] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [startGame, setStartGame] = useState(false);
+  const [images, setImages] = useState([]);
 
   const values = {
     playersData,
@@ -28,6 +29,8 @@ export const CardProvider = ({ children }) => {
     setGameOver,
     startGame,
     setStartGame,
+    images,
+    setImages,
   };
   return <CardContext.Provider value={values}>{children}</CardContext.Provider>;
 };

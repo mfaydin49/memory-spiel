@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "../App.css";
 import Card from "./Card";
 import UserForm from "./UserForm";
-import images from "../images";
+import axios from "axios";
 import GameOver from "./GameOver";
 import CardContext from "../context/CardContext";
 import { handleGameOver } from "./GameOver";
@@ -21,11 +21,22 @@ const Cards = () => {
     startGame,
     setStartGame,
   } = useContext(CardContext);
-
   const { playerOne, playerTwo } = playersData;
+  const [images, setImages] = useState([]);
+  const arrangedImages = [];
+
+  const apiImages = () =>
+    images.slice(0, 6).forEach((image) => {
+      const {
+        alt_description: alt,
+        urls: { small: src },
+      } = image;
+      arrangedImages.push({ src, alt, matched: false });
+    });
 
   const shuffleCards = () => {
-    const shuffledImages = [...images, ...images]
+    apiImages();
+    const shuffledImages = [...arrangedImages, ...arrangedImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
     setChoiceOne(null);
@@ -39,7 +50,20 @@ const Cards = () => {
   };
 
   useEffect(() => {
-    shuffleCards();
+    const fetchImages = async () => {
+      try {
+        const res = await axios
+          .get(
+            `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_CLIENT_ID}`
+          )
+          .then((res) => res);
+        setImages(res.data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    fetchImages();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -104,7 +128,7 @@ const Cards = () => {
         <h1>Memory-Spiel</h1>
         <button onClick={shuffleCards}>New Game</button>
       </div>
-      <UserForm />
+      <UserForm shuffleCards={shuffleCards} />
       {handleGameOver({ playersData }) && <GameOver />}
       {startGame ? (
         <div className="cards">

@@ -53,6 +53,7 @@ button:hover {
   display: block;
   border: 2px solid bisque;
   border-radius: 6px;
+  height: 120px;
 }
 
 .card-container .back {

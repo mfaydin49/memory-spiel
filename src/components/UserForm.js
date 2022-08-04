@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import CardContext from "../context/CardContext";
 
-const UserForm = () => {
+const UserForm = ({ shuffleCards }) => {
   const { playersData, setPlayersData, startGame, setStartGame } =
     useContext(CardContext);
   const { playerOne, playerTwo } = playersData;
@@ -44,7 +44,12 @@ const UserForm = () => {
         />
       </div>
       <div>
-        <button className={startGame ? "unclickable" : ""}>Start</button>
+        <button
+          onClick={shuffleCards}
+          className={startGame ? "unclickable" : ""}
+        >
+          Start
+        </button>
       </div>
       <div>
         <span className={playerTwo.turn ? "dot" : "displayNone"}></span>
