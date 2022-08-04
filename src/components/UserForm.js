@@ -43,6 +43,7 @@ const UserForm = () => {
         <h3>Name: {playerOne.name}</h3>
         <h3>Score: {playerOne.score}</h3>
         <input
+          className={startGame ? "unclickable" : ""}
           name="playerOneName"
           value={form.playerOneName}
           placeholder="Player 1"
@@ -57,6 +58,7 @@ const UserForm = () => {
         <h3>Name: {playerTwo.name}</h3>
         <h3>Score: {playerTwo.score}</h3>
         <input
+          className={startGame ? "unclickable" : ""}
           name="playerTwoName"
           value={form.playerTwoName}
           placeholder="Player 2"
