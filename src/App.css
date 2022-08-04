@@ -1,0 +1,145 @@
+.App {
+  display: grid;
+  text-align: center;
+  width: 40%;
+  margin: 2px auto;
+}
+
+body {
+  background-color: #282c34;
+  font-family: "Delius", cursive;
+  opacity: 4px;
+  color: beige;
+}
+
+h1,
+h3 {
+  margin: 2px;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+button {
+  background: none;
+  border: 2px solid bisque;
+  margin: 20px 6px 6px 6px;
+  border-radius: 4px;
+  color: bisque;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 2px 16px;
+}
+
+button:hover {
+  background-color: bisque;
+  color: #282c34;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.card-container {
+  position: relative;
+}
+
+.card-container img {
+  width: 120px;
+  display: block;
+  border: 2px solid bisque;
+  border-radius: 6px;
+}
+
+.card-container .back {
+  transform: rotateY(90deg);
+  position: absolute;
+  transition: all ease-in 0.2s;
+}
+
+.flipped .back {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
+}
+
+.card-container .front {
+  transition: 0.2s;
+  transition: all ease-in 0.2s;
+}
+
+.flipped .front {
+  transform: rotateY(90deg);
+  transition-delay: 0s;
+}
+
+.playerName {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 0px 18px 0px;
+}
+
+.playerName input {
+  border: 3px solid bisque;
+  color: #282c34;
+  background-color: bisque;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.playerName div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.dot {
+  height: 18px;
+  width: 18px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.gameOver {
+  position: absolute;
+  z-index: 1;
+  color: red;
+  font-size: 70px;
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 2px black, 0 0 25px bisque, 0 0 5px rgb(198, 198, 207);
+}
+
+.displayNone {
+  display: none;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .playerName {
+    display: grid;
+    justify-content: center;
+  }
+}
