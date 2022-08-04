@@ -28,10 +28,4 @@ const GameOver = () => {
   );
 };
 
-export const handleGameOver = ({ playersData }) => {
-  return playersData.playerOne.score + playersData.playerTwo.score === 6
-    ? true
-    : false;
-};
-
 export default GameOver;
