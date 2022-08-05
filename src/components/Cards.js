@@ -8,9 +8,11 @@ import shuffleCards from "../lib/shuffleCards";
 import setScoreAndTurn from "../lib/setScoreAndTurn";
 import handleGameOver from "../lib/handleGameOver";
 import setPlayerTurn from "../lib/setPlayerTurn";
+import gridTemplate from "../lib/gridTemplate";
 import reset from "../lib/reset";
 import GameOver from "./GameOver";
 import CardContext from "../context/CardContext";
+import CardCount from "./CardCount";
 
 const Cards = () => {
   const {
@@ -28,8 +30,8 @@ const Cards = () => {
   } = useContext(CardContext);
   const { playerOne, playerTwo } = playersData;
   const [images, setImages] = useState([]);
-
-  const arrangedImages = countOfImage(images);
+  const [count, setCount] = useState(6);
+  const arrangedImages = countOfImage(images, count);
 
   const getCards = () => {
     const cards = shuffleCards(arrangedImages);
@@ -68,6 +70,10 @@ const Cards = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choiceOne, choiceTwo, playerOne, playerTwo]);
 
+  const cardCountChange = (e) => {
+    setCount(e.target.value / 2);
+  };
+
   return (
     <>
       <div className="header">
@@ -75,9 +81,9 @@ const Cards = () => {
         <button onClick={getCards}>New Game</button>
       </div>
       <UserForm getCards={getCards} />
-      {handleGameOver(playersData) && <GameOver />}
+      {handleGameOver(playersData, count) && <GameOver />}
       {startGame ? (
-        <div className="cards">
+        <div className="cards" style={gridTemplate(count)}>
           {cards.map((card) => (
             <Card
               key={card.id}
@@ -87,9 +93,11 @@ const Cards = () => {
           ))}
         </div>
       ) : (
-        ""
+        <div>
+          <CardCount cardCountChange={cardCountChange} />
+          <p>* Enter name to start the game</p>
+        </div>
       )}
-      <p>* Name eingeben, um das Spiel zu starten</p>
     </>
   );
 };
