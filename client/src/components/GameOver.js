@@ -6,11 +6,12 @@ const GameOver = () => {
   const { playersData } = useContext(CardContext);
   const { playerOne, playerTwo } = playersData;
 
-  if (playerOne.score > playerTwo.score) {
-    addName({ name: playerOne.name, score: playerOne.score });
-  }
-  if (playerOne.score < playerTwo.score) {
-    addName({ name: playerTwo.name, score: playerTwo.score });
+  if (playerOne.score > playerTwo.score || playerOne.score < playerTwo.score) {
+    if (playerOne.score > playerTwo.score) {
+      addName({ name: playerOne.name, score: playerOne.score });
+    } else {
+      addName({ name: playerTwo.name, score: playerTwo.score });
+    }
   }
 
   return (

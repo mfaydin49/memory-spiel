@@ -15,19 +15,7 @@ import CardContext from "../context/CardContext";
 import CardCount from "./CardCount";
 
 const Cards = () => {
-  const {
-    playersData,
-    setPlayersData,
-    cards,
-    setCards,
-    choiceOne,
-    setChoiceOne,
-    choiceTwo,
-    setChoiceTwo,
-    setDisabled,
-    startGame,
-    setStartGame,
-  } = useContext(CardContext);
+  const { playersData, setPlayersData, cards, setCards, choiceOne, setChoiceOne, choiceTwo, setChoiceTwo, setDisabled, startGame, setStartGame, gameOver, setGameOver } = useContext(CardContext);
   const { playerOne, playerTwo } = playersData;
   const [images, setImages] = useState([]);
   const [count, setCount] = useState(6);
@@ -54,9 +42,7 @@ const Cards = () => {
       setDisabled(true);
       if (choiceOne.src === choiceTwo.src) {
         setCards((cards) => {
-          return cards.map((card) =>
-            card.src === choiceOne.src ? { ...card, matched: true } : card
-          );
+          return cards.map((card) => (card.src === choiceOne.src ? { ...card, matched: true } : card));
         });
         reset(setChoiceOne, setChoiceTwo, setDisabled);
         setScoreAndTurn(playerOne, playerTwo, setPlayersData);
@@ -68,7 +54,7 @@ const Cards = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [choiceOne, choiceTwo, playerOne, playerTwo]);
+  }, [choiceTwo]);
 
   const cardCountChange = (e) => {
     setCount(e.target.value / 2);
@@ -84,12 +70,9 @@ const Cards = () => {
       {handleGameOver(playersData, count) && <GameOver />}
       {startGame ? (
         <div className="cards" style={gridTemplate(count)}>
+          {gameOver && <GameOver />}
           {cards.map((card) => (
-            <Card
-              key={card.id}
-              card={card}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-            />
+            <Card key={card.id} card={card} flipped={card === choiceOne || card === choiceTwo || card.matched} />
           ))}
         </div>
       ) : (
