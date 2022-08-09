@@ -129,6 +129,35 @@ button:hover {
   pointer-events: none;
 }
 
+#winner-title {
+  margin-top: 15px;
+}
+
+#winner-board {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#winner-board td,
+#winner-board th {
+  border: 1px solid bisque;
+  padding: 8px;
+}
+
+#winner-board tr:hover {
+  background-color: bisque;
+  color: #282c34;
+}
+
+#winner-board th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
+
 @media (max-width: 1000px) {
   .cards {
     grid-template-columns: repeat(3, 1fr);

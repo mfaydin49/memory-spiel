@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import "../App.css";
 import Card from "./Card";
 import UserForm from "./UserForm";
+import Header from "./Header";
 import fetchImages from "../lib/fetchImages";
 import countOfImage from "../lib/countOfImage";
 import shuffleCards from "../lib/shuffleCards";
@@ -62,10 +63,7 @@ const Cards = () => {
 
   return (
     <>
-      <div className="header">
-        <h1>Memory-Spiel</h1>
-        <button onClick={getCards}>New Game</button>
-      </div>
+      <Header getCards={getCards} />
       <UserForm getCards={getCards} />
       {handleGameOver(playersData, count) && <GameOver />}
       {startGame ? (
